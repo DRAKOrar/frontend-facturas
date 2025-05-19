@@ -1,0 +1,79 @@
+<div class="container mt-5">
+  <h2 class="text-center mb-4 animate__animated animate__fadeInDown">
+    <i class="fas fa-file-invoice me-2"></i>Facturas por Cliente
+  </h2>
+
+  <!-- Buscador -->
+  <div class="row mb-4 animate__animated animate__fadeIn">
+    <div class="col-md-6 offset-md-3">
+      <div class="input-group shadow-sm">
+        <span class="input-group-text bg-white border-end-0"><i class="fas fa-user text-primary"></i></span>
+        <input
+          type="number"
+          class="form-control form-control-lg border-start-0"
+          [formControl]="clienteIdControl"
+          placeholder="Ingrese ID del cliente"
+          (keyup.enter)="buscarFacturas()" />
+        <button
+          class="btn btn-primary btn-lg"
+          (click)="buscarFacturas()"
+          [disabled]="!clienteIdControl.value">
+          <i class="fas fa-search"></i> Buscar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cargando -->
+  <div *ngIf="loading" class="text-center my-4 animate__animated animate__fadeIn">
+    <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+      <span class="visually-hidden">Cargando...</span>
+    </div>
+  </div>
+
+  <!-- Error -->
+  <div *ngIf="errorMessage" class="alert alert-danger animate__animated animate__shakeX">
+    <i class="fas fa-exclamation-triangle me-2"></i>{{ errorMessage }}
+  </div>
+
+  <!-- Tabla de facturas -->
+  <div *ngIf="facturas.length > 0" class="table-responsive animate__animated animate__fadeInUp">
+    <table class="table table-hover table-bordered shadow-sm rounded overflow-hidden">
+      <thead class="table-dark">
+        <tr>
+          <th>ID</th>
+          <th>Fecha</th>
+          <th>Estado</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let factura of facturas" class="table-row-hover">
+          <td><strong>#{{ factura.id }}</strong></td>
+          <td>{{ factura.fechaCreacion | date:'dd/MM/yyyy' }}</td>
+          <td>
+            <span class="badge fs-6 px-3 py-1"
+              [ngClass]="{
+                'bg-success': factura.estado === 'ACTIVA',
+                'bg-secondary': factura.estado === 'INACTIVA'
+              }">
+              <i class="fas"
+                [ngClass]="{
+                  'fa-check-circle': factura.estado === 'ACTIVA',
+                  'fa-pause-circle': factura.estado === 'INACTIVA'
+                }">
+              </i> {{ factura.estado }}
+            </span>
+          </td>
+          <td><i class="fas fa-dollar-sign me-1 text-success"></i>{{ factura.total | number:'1.0-0' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Estado vacío -->
+  <div *ngIf="facturas.length === 0 && !loading && !errorMessage" class="text-center mt-5 text-muted">
+    <i class="fas fa-receipt fa-3x mb-3 text-secondary animate__animated animate__fadeIn"></i>
+    <p class="lead">No se encontraron facturas para este cliente.</p>
+  </div>
+</div>

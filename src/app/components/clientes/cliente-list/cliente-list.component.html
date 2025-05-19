@@ -1,0 +1,90 @@
+<div class="clientes-container">
+  <div class="clientes-header">
+    <h2 class="clientes-title">
+      <i class="fas fa-users me-2"></i>Gestión de Clientes
+    </h2>
+    <p class="clientes-subtitle">
+      <i class="fas fa-info-circle me-2"></i>Administra los clientes registrados en el sistema
+    </p>
+  </div>
+
+  <div *ngIf="errorMessage" class="alert alert-danger alert-custom">
+    <i class="fas fa-exclamation-triangle me-2"></i>{{ errorMessage }}
+  </div>
+
+
+
+  <div class="clientes-actions">
+    <button class="btn btn-add" (click)="irAgregarCliente()">
+      <i class="fas fa-plus-circle me-2"></i>Agregar Nuevo Cliente
+    </button>
+    <!-- Encabezados con botones para ordenar -->
+<thead>
+  <tr>
+    <th (click)="ordenar('id')" class="sortable" [class.activo]="ordenActual === 'id'">
+      ID
+      <i class="fas" [ngClass]="getIconoOrden('id')"></i>
+    </th>
+    <th (click)="ordenar('nombre')" class="sortable" [class.activo]="ordenActual === 'nombre'">
+      Nombre
+      <i class="fas" [ngClass]="getIconoOrden('nombre')"></i>
+    </th>
+  </tr>
+</thead>
+
+  </div>
+
+  
+  <div class="table-responsive" *ngIf="clientes.length > 0">
+    <table class="clientes-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Teléfono</th>
+          <th>Correo</th>
+          <th>Dirección</th>
+          <th>Cédula</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let cliente of clientes">
+          <td data-label="ID">{{ cliente.id }}</td>
+          <td data-label="Nombre">{{ cliente.nombre }}</td>
+          <td data-label="Teléfono">{{ cliente.telefono }}</td>
+          <td data-label="Correo">{{ cliente.correo }}</td>
+          <td data-label="Dirección">{{ cliente.direccion }}</td>
+          <td data-label="Cédula">{{ cliente.cedula || '-' }}</td>
+          <td data-label="Acciones" class="actions-cell">
+            <button class="btn-action btn-edit" (click)="irEditarCliente(cliente)" title="Editar">
+              <i class="fas fa-edit"></i>
+            </button>
+            <button class="btn-action btn-invoice" (click)="irRegistrarFactura(cliente)" title="Factura">
+              <i class="fas fa-file-invoice-dollar"></i>
+            </button>
+            <button class="btn-action btn-delete" (click)="eliminarCliente(cliente.id!)" title="Eliminar">
+              <i class="fas fa-trash-alt"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="cargando" class="text-center my-4">
+  <div class="spinner-border text-primary" role="status">
+    <span class="visually-hidden">Cargando...</span>
+  </div>
+</div>
+
+
+  <div *ngIf="clientes.length === 0" class="empty-state">
+    <i class="fas fa-users-slash empty-icon"></i>
+    <h3>No hay clientes registrados</h3>
+    <p>Comienza agregando tu primer cliente</p>
+    <button class="btn btn-add" (click)="irAgregarCliente()">
+      <i class="fas fa-plus-circle me-2"></i>Agregar Cliente
+    </button>
+  </div>
+</div>
