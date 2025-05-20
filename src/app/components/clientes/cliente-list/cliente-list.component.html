@@ -19,23 +19,30 @@
       <i class="fas fa-plus-circle me-2"></i>Agregar Nuevo Cliente
     </button>
     <!-- Encabezados con botones para ordenar -->
-<thead>
-  <tr>
-    <th (click)="ordenar('id')" class="sortable" [class.activo]="ordenActual === 'id'">
-      ID
-      <i class="fas" [ngClass]="getIconoOrden('id')"></i>
-    </th>
-    <th (click)="ordenar('nombre')" class="sortable" [class.activo]="ordenActual === 'nombre'">
-      Nombre
-      <i class="fas" [ngClass]="getIconoOrden('nombre')"></i>
-    </th>
-  </tr>
-</thead>
+    <thead>
+      <tr>
+        <th (click)="ordenar('id')" class="sortable" [class.activo]="ordenActual === 'id'">
+          ID
+          <i class="fas" [ngClass]="getIconoOrden('id')"></i>
+        </th>
+        <th (click)="ordenar('nombre')" class="sortable" [class.activo]="ordenActual === 'nombre'">
+          Nombre
+          <i class="fas" [ngClass]="getIconoOrden('nombre')"></i>
+        </th>
+      </tr>
+    </thead>
 
   </div>
 
-  
+
+
+
+
+
   <div class="table-responsive" *ngIf="clientes.length > 0">
+      <div *ngIf="mostrarToast" class="toast-notification">
+  <i class="fas fa-check-circle me-2"></i> Cliente actualizado correctamente
+</div>
     <table class="clientes-table">
       <thead>
         <tr>
@@ -73,10 +80,10 @@
   </div>
 
   <div *ngIf="cargando" class="text-center my-4">
-  <div class="spinner-border text-primary" role="status">
-    <span class="visually-hidden">Cargando...</span>
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Cargando...</span>
+    </div>
   </div>
-</div>
 
 
   <div *ngIf="clientes.length === 0" class="empty-state">
@@ -88,3 +95,7 @@
     </button>
   </div>
 </div>
+
+<app-editar-cliente-modal *ngIf="modalEditarVisible" [cliente]="clienteSeleccionado" (cerrar)="cerrarModal()"
+  (actualizado)="refrescarClientes()">
+</app-editar-cliente-modal>

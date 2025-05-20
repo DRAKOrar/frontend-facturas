@@ -1,0 +1,74 @@
+/* Fondo del modal */
+.modal.fade.show {
+  display: block;
+  background-color: rgba(0, 0, 0, 0.5);
+  animation: fadeInBackdrop 0.3s ease;
+}
+
+@keyframes fadeInBackdrop {
+  from { background-color: rgba(0, 0, 0, 0); }
+  to { background-color: rgba(0, 0, 0, 0.5); }
+}
+
+/* Entrada y salida del modal */
+.modal-dialog {
+  animation: slideInModal 0.4s ease;
+}
+@keyframes slideInModal {
+  from { transform: translateY(-30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+.modal-close-animation {
+  animation: slideOutModal 0.3s ease forwards;
+}
+@keyframes slideOutModal {
+  from { transform: translateY(0); opacity: 1; }
+  to { transform: translateY(-40px); opacity: 0; }
+}
+
+/* Cabecera */
+.modal-header {
+  background-color: #2c3e50;
+  color: white;
+  padding: 1rem 1.5rem;
+  border-bottom: none;
+}
+.modal-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+/* Inputs */
+.form-control:focus {
+  border-color: #3498db;
+  box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Botones */
+.btn {
+  border-radius: 0.5rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+.btn-success {
+  background-color: #2ecc71;
+  border: none;
+}
+.btn-success:hover {
+  background-color: #27ae60;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+.btn-secondary {
+  background-color: #95a5a6;
+  border: none;
+}
+.btn-secondary:hover {
+  background-color: #7f8c8d;
+}
+
+/* Productos */
+.border {
+  border: 1px solid #dee2e6;
+}

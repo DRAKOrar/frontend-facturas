@@ -1,0 +1,60 @@
+<div class="modal fade show" tabindex="-1" style="display: block;">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header bg-info text-white">
+        <h5 class="modal-title">
+          <i class="fas fa-receipt me-2"></i>Factura #{{ factura.id }}
+        </h5>
+        <button type="button" class="btn-close" (click)="cerrarConAnimacion()"></button>
+      </div>
+      <div class="modal-body">
+        <p><strong>Cliente:</strong> {{ factura.cliente?.nombre }} ({{ factura.cliente?.cedula }})</p>
+        <p><strong>Dirección:</strong> {{ factura.cliente?.direccion }}</p>
+        <p><strong>Correo:</strong> {{ factura.cliente?.correo }}</p>
+        <p><strong>Teléfono:</strong> {{ factura.cliente?.telefono }}</p>
+        <p><strong>Estado:</strong>
+          <span class="badge" [ngClass]="{
+            'bg-success': factura.estado === 'ACTIVA',
+            'bg-danger': factura.estado === 'INACTIVA'
+          }">
+            {{ obtenerTextoEstado(factura.estado) }}
+
+          </span>
+        </p>
+        <p><strong>Fecha de creación:</strong> {{ factura.fechaCreacion | date:'dd/MM/yyyy' }}</p>
+        <p><strong>Última actualización:</strong> {{ factura.fechaActualizacion | date:'dd/MM/yyyy' }}</p>
+
+        <hr>
+
+        <h6>Productos:</h6>
+        <table class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Cantidad</th>
+              <th>Precio Unitario</th>
+              <th>Subtotal</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let p of factura.productos">
+              <td>{{ p.nombre }}</td>
+              <td>{{ p.cantidad }}</td>
+              <td>{{ p.precioUnitario | currency:'COP':'symbol-narrow':'1.0-0' }}</td>
+              <td>{{ p.cantidad * p.precioUnitario | currency:'COP':'symbol-narrow':'1.0-0' }}</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h5 class="text-end mt-3">
+          Total: {{ factura.total | currency:'COP':'symbol-narrow':'1.0-0' }}
+        </h5>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" (click)="cerrarConAnimacion()">
+          <i class="fas fa-times me-1"></i> Cerrar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

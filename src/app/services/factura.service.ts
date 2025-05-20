@@ -43,5 +43,10 @@ obtenerActivasPorCliente(clienteId: number): Observable<Factura[]> {
   return this.http.get<Factura[]>(`${this.apiUrl}/cliente/${clienteId}/activas`);
 }
 
+listarTodas(): Observable<Factura[]> {
+  return this.http.get<Factura[]>(`${this.apiUrl}`);
+}
+
+
 
 }
