@@ -1,3 +1,4 @@
+import { FacturaService } from './../../../services/factura.service';
 
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -20,7 +21,7 @@ export class ClienteListComponent {
   clientes: Cliente[] = [];
   errorMessage: string | null = null;
 
-  constructor(private clienteService: ClienteService, private router: Router) { }
+  constructor(private clienteService: ClienteService, private router: Router, private facturaService: FacturaService) { }
 
   ngOnInit(): void {
     this.cargarClientes();
@@ -107,6 +108,12 @@ refrescarClientes(): void {
   this.mostrarToast = true;
   setTimeout(() => this.mostrarToast = false, 3000);
 }
+
+descargarListadoFacturasCliente(clienteId: number): void {
+  this.clienteService.descargarReporteFacturasPorCliente(clienteId);
+}
+
+
 
 
 

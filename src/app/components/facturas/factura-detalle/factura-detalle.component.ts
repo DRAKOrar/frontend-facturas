@@ -82,6 +82,10 @@ cerrarModalEditar(): void {
 refrescarFacturas(): void {
   this.cargarFacturas();
 }
+descargarPDF(id: number): void {
+  this.facturaService.descargarReporteFactura(id);
+}
+
 
 modalDetalleVisible = false;
 facturaParaVer!: Factura;
