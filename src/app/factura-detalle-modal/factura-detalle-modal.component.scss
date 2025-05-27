@@ -1,0 +1,74 @@
+.modal.fade.show {
+  display: block;
+  background-color: rgba(0, 0, 0, 0.5);
+  animation: fadeInBackdrop 0.3s ease;
+}
+
+@keyframes fadeInBackdrop {
+  from { background-color: rgba(0, 0, 0, 0); }
+  to { background-color: rgba(0, 0, 0, 0.5); }
+}
+
+.modal-dialog {
+  animation: slideInModal 0.4s ease;
+}
+@keyframes slideInModal {
+  from { transform: translateY(-30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+.modal-close-animation {
+  animation: slideOutModal 0.3s ease forwards;
+}
+@keyframes slideOutModal {
+  from { transform: translateY(0); opacity: 1; }
+  to { transform: translateY(-40px); opacity: 0; }
+}
+
+.modal-header {
+  background-color: #3498db;
+  color: white;
+}
+
+.badge {
+  font-size: 0.9rem;
+  padding: 0.35rem 0.6rem;
+  border-radius: 0.5rem;
+}
+
+.modal.fade.show {
+  display: block;
+  background-color: rgba(0, 0, 0, 0.5);
+  animation: fadeInBackdrop 0.3s ease;
+}
+
+@keyframes fadeInBackdrop {
+  from { background-color: rgba(0, 0, 0, 0); }
+  to { background-color: rgba(0, 0, 0, 0.5); }
+}
+
+.modal-dialog {
+  animation: slideInModal 0.4s ease;
+}
+@keyframes slideInModal {
+  from { transform: translateY(-30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+.modal-close-animation {
+  animation: slideOutModal 0.3s ease forwards;
+}
+@keyframes slideOutModal {
+  from { transform: translateY(0); opacity: 1; }
+  to { transform: translateY(-40px); opacity: 0; }
+}
+
+.modal-header {
+  background-color: #3498db;
+  color: white;
+}
+
+.badge {
+  font-size: 0.9rem;
+  padding: 0.35rem 0.6rem;
+  border-radius: 0.5rem;
+}
+

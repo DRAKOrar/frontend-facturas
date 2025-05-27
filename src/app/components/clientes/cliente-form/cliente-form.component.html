@@ -1,49 +1,106 @@
-<div class="container mt-5">
-  <div class="text-center mb-4 animate__animated animate__fadeInDown">
-    <h2><i class="fas fa-user-plus me-2"></i>Agregar Cliente</h2>
-    <p class="text-muted">Llena el siguiente formulario para registrar un nuevo cliente</p>
-  </div>
+<body>
+    <div class="container mt-5">
+        <div class="form-header animate__animated animate__fadeInDown">
+            <h2><i class="fas fa-user-plus me-2"></i>Agregar Cliente</h2>
+            <p>Llena el siguiente formulario para registrar un nuevo cliente en el sistema</p>
+        </div>
 
-  <!-- Mensajes -->
-  <div *ngIf="successMessage" class="alert alert-success alert-dismissible fade show animate__animated animate__fadeIn" role="alert">
-    <i class="fas fa-check-circle me-2"></i>{{ successMessage }}
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
-  </div>
-  <div *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade show animate__animated animate__shakeX" role="alert">
-    <i class="fas fa-exclamation-circle me-2"></i>{{ errorMessage }}
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
-  </div>
+        <!-- Mensajes mejorados -->
+        <div *ngIf="successMessage" class="alert alert-success alert-dismissible fade show animate__animated animate__fadeIn" role="alert">
+            <i class="fas fa-check-circle me-2"></i>{{ successMessage }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
 
-  <!-- Formulario -->
-  <form (ngSubmit)="agregarCliente()" class="bg-white p-4 shadow-lg rounded animate__animated animate__fadeInUp" style="transition: all 0.3s ease;">
+        <div *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade show animate__animated animate__shakeX" role="alert">
+            <i class="fas fa-exclamation-circle me-2"></i>{{ errorMessage }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
 
-    <div class="mb-3">
-      <label class="form-label fw-bold"><i class="fas fa-user me-2"></i>Nombre</label>
-      <input type="text" [(ngModel)]="nuevoCliente.nombre" name="nombre" class="form-control" placeholder="Ingrese el nombre completo" required />
+        <!-- Formulario mejorado -->
+        <form (ngSubmit)="agregarCliente()" class="form-container animate__animated animate__fadeInUp">
+
+            <div class="form-group">
+                <label class="form-label">Nombre Completo</label>
+                <div class="input-container">
+                    <input
+                        type="text"
+                        [(ngModel)]="nuevoCliente.nombre"
+                        name="nombre"
+                        class="form-control"
+                        placeholder="Ingrese el nombre completo del cliente"
+                        required
+                    />
+                    <i class="fas fa-user input-icon"></i>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Número de Teléfono</label>
+                <div class="input-container">
+                    <input
+                        type="text"
+                        [(ngModel)]="nuevoCliente.telefono"
+                        name="telefono"
+                        class="form-control"
+                        placeholder="Ej: 3001234567"
+                        required
+                    />
+                    <i class="fas fa-phone input-icon"></i>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Correo Electrónico</label>
+                <div class="input-container">
+                    <input
+                        type="email"
+                        [(ngModel)]="nuevoCliente.correo"
+                        name="correo"
+                        class="form-control"
+                        placeholder="cliente@ejemplo.com"
+                        required
+                    />
+                    <i class="fas fa-envelope input-icon"></i>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Dirección de Residencia</label>
+                <div class="input-container">
+                    <input
+                        type="text"
+                        [(ngModel)]="nuevoCliente.direccion"
+                        name="direccion"
+                        class="form-control"
+                        placeholder="Dirección completa de residencia"
+                        required
+                    />
+                    <i class="fas fa-map-marker-alt input-icon"></i>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Número de Cédula</label>
+                <div class="input-container">
+                    <input
+                        type="text"
+                        [(ngModel)]="nuevoCliente.cedula"
+                        name="cedula"
+                        class="form-control"
+                        placeholder="Ej: 1234567890"
+                        required
+                    />
+                    <i class="fas fa-id-card input-icon"></i>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-submit">
+                <i class="fas fa-save me-2"></i>Guardar Cliente
+            </button>
+        </form>
     </div>
-
-    <div class="mb-3">
-      <label class="form-label fw-bold"><i class="fas fa-phone-alt me-2"></i>Teléfono</label>
-      <input type="text" [(ngModel)]="nuevoCliente.telefono" name="telefono" class="form-control" placeholder="Ej: 3001234567" required />
-    </div>
-
-    <div class="mb-3">
-      <label class="form-label fw-bold"><i class="fas fa-envelope me-2"></i>Correo</label>
-      <input type="email" [(ngModel)]="nuevoCliente.correo" name="correo" class="form-control" placeholder="cliente@correo.com" required />
-    </div>
-
-    <div class="mb-3">
-      <label class="form-label fw-bold"><i class="fas fa-map-marker-alt me-2"></i>Dirección</label>
-      <input type="text" [(ngModel)]="nuevoCliente.direccion" name="direccion" class="form-control" placeholder="Dirección de residencia" required />
-    </div>
-
-    <div class="mb-4">
-      <label class="form-label fw-bold"><i class="fas fa-id-card me-2"></i>Cédula (opcional)</label>
-      <input type="text" [(ngModel)]="nuevoCliente.cedula" name="cedula" class="form-control" placeholder="Ej: 1234567890" />
-    </div>
-
-    <button type="submit" class="btn btn-primary w-100 animate__animated animate__pulse animate__infinite" style="transition: background-color 0.3s ease;">
-      <i class="fas fa-save me-2"></i>Guardar Cliente
-    </button>
-  </form>
-</div>
+</body>

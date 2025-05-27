@@ -5,15 +5,34 @@ import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class ClienteService {
-  private apiUrl = 'http://localhost:8080/clientes';
-
-  constructor(private http: HttpClient) {}
+  //private apiUrl = 'http://localhost:8080/clientes';
+  private apiUrl = 'https://fiados-api.onrender.com/clientes';
+  constructor(private http: HttpClient) { }
 
   // 🔹 Listar todos los clientes
   listarClientes(): Observable<Cliente[]> {
     return this.http.get<Cliente[]>(this.apiUrl);
   }
 
+  descargarReporteFacturasPorCliente(clienteId: number, nombreCliente: string): void {
+  this.http.get(`${this.apiUrl}/${clienteId}/reporte-facturas`, {
+    responseType: 'blob'
+  }).subscribe(blob => {
+    const nombreLimpio = nombreCliente.replace(/[^a-zA-Z0-9]/g, "_");
+    const nombreArchivo = `facturas_${nombreLimpio}.pdf`;
+
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = nombreArchivo;
+    a.click();
+    window.URL.revokeObjectURL(url);
+  });
+}
+
+validarCedula(cedula: string): Observable<boolean> {
+  return this.http.get<boolean>(`${this.apiUrl}/cedula-existe/${cedula}`);
+}
 
   // 🔹 Obtener cliente por ID
   obtenerCliente(id: number): Observable<Cliente> {
@@ -37,8 +56,8 @@ export class ClienteService {
   }
 
   // Clientes con deuda (facturas activas)
-obtenerClientesConDeuda(): Observable<Cliente[]> {
-  return this.http.get<Cliente[]>(`${this.apiUrl}/con-deuda`);
-}
+  obtenerClientesConDeuda(): Observable<Cliente[]> {
+    return this.http.get<Cliente[]>(`${this.apiUrl}/con-deuda`);
+  }
 
 }

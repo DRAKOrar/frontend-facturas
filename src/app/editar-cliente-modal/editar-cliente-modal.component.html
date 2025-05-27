@@ -1,0 +1,38 @@
+<div class="modal fade show" tabindex="-1" style="display: block;" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title">Editar Cliente</h5>
+        <button type="button" class="btn-close" (click)="cerrar.emit()"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="form">
+          <div class="mb-3">
+            <label class="form-label">Nombre</label>
+            <input class="form-control" formControlName="nombre">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Correo</label>
+            <input class="form-control" formControlName="correo" type="email">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Teléfono</label>
+            <input class="form-control" formControlName="telefono">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Dirección</label>
+            <input class="form-control" formControlName="direccion">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Cédula</label>
+            <input class="form-control" formControlName="cedula">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" (click)="cerrarConAnimacion()">Cancelar</button>
+        <button class="btn btn-success" (click)="guardar()">Guardar Cambios</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,79 +1,128 @@
-<div class="container mt-5">
-  <h2 class="text-center mb-4 animate__animated animate__fadeInDown">
-    <i class="fas fa-file-invoice me-2"></i>Facturas por Cliente
-  </h2>
+<body>
+    <div class="container mt-4">
+        <div class="page-header">
+            <h2><i class="fas fa-file-invoice-dollar me-2"></i>Gestión de Facturas</h2>
+            <p class="subtitle">Administra y controla todas las facturas del sistema</p>
+        </div>
 
-  <!-- Buscador -->
-  <div class="row mb-4 animate__animated animate__fadeIn">
-    <div class="col-md-6 offset-md-3">
-      <div class="input-group shadow-sm">
-        <span class="input-group-text bg-white border-end-0"><i class="fas fa-user text-primary"></i></span>
-        <input
-          type="number"
-          class="form-control form-control-lg border-start-0"
-          [formControl]="clienteIdControl"
-          placeholder="Ingrese ID del cliente"
-          (keyup.enter)="buscarFacturas()" />
-        <button
-          class="btn btn-primary btn-lg"
-          (click)="buscarFacturas()"
-          [disabled]="!clienteIdControl.value">
-          <i class="fas fa-search"></i> Buscar
-        </button>
-      </div>
+        <!-- Filtro mejorado -->
+        <div class="search-container">
+            <div class="position-relative">
+                <input
+                    type="text"
+                    [(ngModel)]="filtro"
+                    (input)="filtrar()"
+                    placeholder="Buscar por nombre, cédula o ID de factura..."
+                    class="search-input"
+                />
+                <i class="fas fa-search search-icon"></i>
+            </div>
+        </div>
+
+        <!-- Errores -->
+        <div *ngIf="errorMessage" class="alert alert-danger">
+            <i class="fas fa-exclamation-triangle me-2"></i>{{ errorMessage }}
+        </div>
+
+        <!-- Cargando -->
+        <div *ngIf="cargando" class="loading-container">
+            <div class="spinner-border" role="status">
+                <span class="visually-hidden">Cargando...</span>
+            </div>
+            <div class="loading-text">Cargando facturas...</div>
+        </div>
+
+        <!-- Tabla mejorada -->
+        <div *ngIf="facturasFiltradas.length > 0" class="table-container fade-in">
+            <div class="table-responsive">
+                <table class="invoices-table">
+                    <thead>
+                        <tr>
+                            <th><i class="fas fa-hashtag me-2"></i>ID</th>
+                            <th><i class="fas fa-user me-2"></i>Cliente</th>
+                            <th><i class="fas fa-calendar me-2"></i>Fecha</th>
+                            <th><i class="fas fa-dollar-sign me-2"></i>Total</th>
+                            <th><i class="fas fa-info-circle me-2"></i>Estado</th>
+                            <th><i class="fas fa-cogs me-2"></i>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let factura of facturasFiltradas">
+                            <td>
+                                <span class="invoice-id">#{{ factura.id }}</span>
+                            </td>
+                            <td>
+                                <div class="client-info">
+                                    <span class="client-name">{{ factura.cliente?.nombre }}</span>
+                                    <span class="client-id">{{ factura.cliente?.cedula }}</span>
+                                </div>
+                            </td>
+                            <td>
+                                <span class="invoice-date">
+                                    {{ factura.fechaCreacion | date:'dd/MM/yyyy' }}
+                                </span>
+                            </td>
+                            <td>
+                                <span class="invoice-total">
+                                    {{ factura.total | currency:'COP':'symbol-narrow':'1.0-0' }}
+                                </span>
+                            </td>
+                            <td>
+                                <span class="status-badge" [ngClass]="{
+                                    'active': factura.estado === 'ACTIVA',
+                                    'inactive': factura.estado === 'INACTIVA'
+                                }">
+                                    {{ factura.estado === 'INACTIVA' ? 'CANCELADA' : factura.estado }}
+                                </span>
+                            </td>
+                            <td>
+                                <div class="actions-container">
+                                    <button class="action-btn btn-view" (click)="abrirModalDetalle(factura)" title="Ver detalles">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+
+                                    <button class="action-btn btn-edit" (click)="abrirModalEditar(factura)" title="Editar factura">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+
+                                    <button class="action-btn btn-delete" (click)="eliminarFactura(factura.id!)" title="Eliminar factura">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+
+                                    <button class="action-btn btn-pdf" (click)="descargarPDF(factura.id!)" title="Descargar PDF">
+                                        <i class="fas fa-file-pdf"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Sin resultados mejorado -->
+        <div *ngIf="!cargando && facturasFiltradas.length === 0" class="empty-state fade-in">
+            <i class="fas fa-file-invoice empty-icon"></i>
+            <h3 class="empty-title">No se encontraron facturas</h3>
+            <p class="empty-message">
+                <span *ngIf="filtro">No hay facturas que coincidan con tu búsqueda.</span>
+                <span *ngIf="!filtro">Aún no hay facturas registradas en el sistema.</span>
+            </p>
+        </div>
     </div>
-  </div>
 
-  <!-- Cargando -->
-  <div *ngIf="loading" class="text-center my-4 animate__animated animate__fadeIn">
-    <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
-      <span class="visually-hidden">Cargando...</span>
-    </div>
-  </div>
+    <!-- Modales (se mantienen igual que el original) -->
+    <app-editar-factura-modal
+        *ngIf="modalEditarVisible"
+        [factura]="facturaSeleccionada"
+        (cerrar)="cerrarModalEditar()"
+        (actualizada)="refrescarFacturas()">
+    </app-editar-factura-modal>
 
-  <!-- Error -->
-  <div *ngIf="errorMessage" class="alert alert-danger animate__animated animate__shakeX">
-    <i class="fas fa-exclamation-triangle me-2"></i>{{ errorMessage }}
-  </div>
+    <app-factura-detalle-modal
+        *ngIf="modalDetalleVisible"
+        [factura]="facturaParaVer"
+        (cerrar)="cerrarModalDetalle()">
+    </app-factura-detalle-modal>
+</body>
 
-  <!-- Tabla de facturas -->
-  <div *ngIf="facturas.length > 0" class="table-responsive animate__animated animate__fadeInUp">
-    <table class="table table-hover table-bordered shadow-sm rounded overflow-hidden">
-      <thead class="table-dark">
-        <tr>
-          <th>ID</th>
-          <th>Fecha</th>
-          <th>Estado</th>
-          <th>Total</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let factura of facturas" class="table-row-hover">
-          <td><strong>#{{ factura.id }}</strong></td>
-          <td>{{ factura.fechaCreacion | date:'dd/MM/yyyy' }}</td>
-          <td>
-            <span class="badge fs-6 px-3 py-1"
-              [ngClass]="{
-                'bg-success': factura.estado === 'ACTIVA',
-                'bg-secondary': factura.estado === 'INACTIVA'
-              }">
-              <i class="fas"
-                [ngClass]="{
-                  'fa-check-circle': factura.estado === 'ACTIVA',
-                  'fa-pause-circle': factura.estado === 'INACTIVA'
-                }">
-              </i> {{ factura.estado }}
-            </span>
-          </td>
-          <td><i class="fas fa-dollar-sign me-1 text-success"></i>{{ factura.total | number:'1.0-0' }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <!-- Estado vacío -->
-  <div *ngIf="facturas.length === 0 && !loading && !errorMessage" class="text-center mt-5 text-muted">
-    <i class="fas fa-receipt fa-3x mb-3 text-secondary animate__animated animate__fadeIn"></i>
-    <p class="lead">No se encontraron facturas para este cliente.</p>
-  </div>
-</div>

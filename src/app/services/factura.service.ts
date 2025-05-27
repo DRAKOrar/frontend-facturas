@@ -5,7 +5,8 @@ import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class FacturaService {
-  private apiUrl = 'http://localhost:8080/facturas';
+  //private apiUrl = 'http://localhost:8080/facturas';
+  private apiUrl = 'https://fiados-api.onrender.com/facturas';
 
   constructor(private http: HttpClient) {}
 
@@ -42,6 +43,32 @@ obtenerFacturasRecientes(): Observable<Factura[]> {
 obtenerActivasPorCliente(clienteId: number): Observable<Factura[]> {
   return this.http.get<Factura[]>(`${this.apiUrl}/cliente/${clienteId}/activas`);
 }
+
+listarTodas(): Observable<Factura[]> {
+  return this.http.get<Factura[]>(`${this.apiUrl}`);
+}
+
+descargarReporteFactura(id: number): void {
+    this.http.get(`${this.apiUrl}/${id}/reporte`, { responseType: 'blob' }).subscribe(blob => {
+      this.descargarArchivo(blob, `daniel_careverga${id}.pdf`);
+    });
+  }
+
+  descargarReporteTodas(): void {
+    this.http.get(`${this.apiUrl}/reporte`, { responseType: 'blob' }).subscribe(blob => {
+      this.descargarArchivo(blob, `reporte_facturas.pdf`);
+    });
+  }
+
+  private descargarArchivo(blob: Blob, nombre: string) {
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = nombre;
+    a.click();
+    window.URL.revokeObjectURL(url);
+  }
+
 
 
 }
