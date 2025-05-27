@@ -1,7 +1,8 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+<nav class="navbar navbar-expand-lg navbar-dark bg-black shadow-sm">
   <div class="container">
     <a class="navbar-brand" routerLink="/list">
-      <i class="fas fa-file-invoice-dollar me-2"></i>FiadosApp
+      <i class="fas fa-file-invoice-dollar me-2" style="color: #FFB22C;"></i>
+      <span style="color: #FFB22C;">Fiados</span><span style="color: white;">App</span>
     </a>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -28,6 +29,11 @@
         <li class="nav-item">
           <a routerLink="/crear-factura" routerLinkActive="active" class="nav-link">
             <i class="fas fa-plus me-2"></i>Crear Factura
+          </a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/dash" routerLinkActive="active" class="nav-link">
+            <i class="fas fa-chart-line me-2"></i>Métricas
           </a>
         </li>
       </ul>

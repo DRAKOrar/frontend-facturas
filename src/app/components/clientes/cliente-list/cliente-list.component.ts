@@ -109,16 +109,17 @@ refrescarClientes(): void {
   setTimeout(() => this.mostrarToast = false, 3000);
 }
 
-descargarListadoFacturasCliente(clienteId: number): void {
-  this.clienteService.descargarReporteFacturasPorCliente(clienteId);
+descargarListadoFacturasCliente(cliente: Cliente): void {
+  this.clienteService.descargarReporteFacturasPorCliente(cliente.id!, cliente.nombre);
 }
 
 
 
 
 
+
   irRegistrarFactura(cliente: Cliente): void {
-    this.router.navigate([`/clientes/${cliente.id}/facturas/nueva`]);
+    this.router.navigate([`/crear-factura`]);
   }
 
 

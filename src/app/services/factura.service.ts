@@ -49,7 +49,7 @@ listarTodas(): Observable<Factura[]> {
 
 descargarReporteFactura(id: number): void {
     this.http.get(`${this.apiUrl}/${id}/reporte`, { responseType: 'blob' }).subscribe(blob => {
-      this.descargarArchivo(blob, `factura_${id}.pdf`);
+      this.descargarArchivo(blob, `daniel_careverga${id}.pdf`);
     });
   }
 

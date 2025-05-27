@@ -14,17 +14,26 @@ export class ClienteService {
     return this.http.get<Cliente[]>(this.apiUrl);
   }
 
-  descargarReporteFacturasPorCliente(clienteId: number): void {
-    this.http.get(`http://localhost:8080/clientes/${clienteId}/reporte-facturas`, { responseType: 'blob' })
-      .subscribe(blob => {
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `facturas_cliente_${clienteId}.pdf`;
-        a.click();
-        window.URL.revokeObjectURL(url);
-      });
-  }
+  descargarReporteFacturasPorCliente(clienteId: number, nombreCliente: string): void {
+  this.http.get(`http://localhost:8080/clientes/${clienteId}/reporte-facturas`, {
+    responseType: 'blob'
+  }).subscribe(blob => {
+    const nombreLimpio = nombreCliente.replace(/[^a-zA-Z0-9]/g, "_");
+    const nombreArchivo = `facturas_${nombreLimpio}.pdf`;
+
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = nombreArchivo;
+    a.click();
+    window.URL.revokeObjectURL(url);
+  });
+}
+
+validarCedula(cedula: string): Observable<boolean> {
+  return this.http.get<boolean>(`http://localhost:8080/clientes/cedula-existe/${cedula}`);
+}
+
 
 
 

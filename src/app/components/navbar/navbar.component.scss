@@ -1,13 +1,69 @@
+/* Estilos para la barra de navegación negro-amarilla */
+.bg-black {
+  background-color: #000000 !important;
+}
+
+.navbar {
+  border-bottom: 2px solid #FFB22C;
+}
+
 .navbar-brand {
   font-weight: bold;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
+  letter-spacing: 0.5px;
 }
 
 .nav-link {
+  color: #ffffff !important;
   transition: all 0.3s ease;
+  padding: 0.5rem 1rem;
+  margin: 0 0.2rem;
+  border-radius: 4px;
+  font-weight: 500;
 }
 
 .nav-link:hover {
-  color: #0dcaf0 !important;
+  color: #000000 !important;
+  background-color: #FFB22C;
   transform: translateY(-2px);
+}
+
+.nav-link i {
+  transition: all 0.3s ease;
+}
+
+.nav-link:hover i {
+  color: #000000 !important;
+}
+
+.nav-link.active {
+  background-color: rgba(255, 178, 44, 0.2);
+  border-left: 3px solid #FFB22C;
+}
+
+.nav-link.active:hover {
+  background-color: #FFB22C;
+}
+
+.navbar-toggler {
+  border-color: #FFB22C;
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 178, 44, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+@media (max-width: 992px) {
+  .navbar-collapse {
+    background-color: #000000;
+    padding: 1rem;
+    margin-top: 0.5rem;
+    border-radius: 0 0 8px 8px;
+    border: 1px solid #FFB22C;
+    border-top: none;
+  }
+
+  .nav-link {
+    margin: 0.2rem 0;
+  }
 }

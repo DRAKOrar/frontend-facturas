@@ -28,33 +28,33 @@ export class ClienteFormComponent {
   constructor(private clienteService: ClienteService) {}
 
   agregarCliente() {
-    
-    this.successMessage = '';
-    this.errorMessage = '';
+  this.successMessage = '';
+  this.errorMessage = '';
 
-    // Validación básica
-    if (!this.nuevoCliente.nombre || !this.nuevoCliente.telefono || !this.nuevoCliente.correo || !this.nuevoCliente.direccion) {
-      this.errorMessage = 'Todos los campos excepto la cédula son obligatorios.';
+  if (!this.nuevoCliente.nombre || !this.nuevoCliente.telefono || !this.nuevoCliente.correo || !this.nuevoCliente.direccion || !this.nuevoCliente.cedula) {
+    this.errorMessage = 'Todos los campos son obligatorios.';
+    return;
+  }
+
+  // Validación de correo
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailPattern.test(this.nuevoCliente.correo)) {
+    this.errorMessage = 'El correo electrónico no es válido.';
+    return;
+  }
+
+  // Validar que la cédula no exista
+  this.clienteService.validarCedula(this.nuevoCliente.cedula).subscribe(existe => {
+    if (existe) {
+      this.errorMessage = 'Ya existe un cliente con esta cédula.';
       return;
     }
 
-    // Validación de correo
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailPattern.test(this.nuevoCliente.correo)) {
-      this.errorMessage = 'El correo electrónico no es válido.';
-      return;
-    }
-
+    // Si no existe, continúa con la creación
     this.clienteService.crearCliente(this.nuevoCliente).subscribe({
       next: () => {
         this.successMessage = 'Cliente creado exitosamente.';
-        this.nuevoCliente = {
-          nombre: '',
-          telefono: '',
-          correo: '',
-          direccion: '',
-          cedula: ''
-        };
+        this.nuevoCliente = { nombre: '', telefono: '', correo: '', direccion: '', cedula: '' };
       },
       error: (error) => {
         if (error.status === 400 && error.error) {
@@ -64,5 +64,7 @@ export class ClienteFormComponent {
         }
       }
     });
-  }
+  });
+}
+
 }
