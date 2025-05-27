@@ -1,74 +1,200 @@
+/* Fondo modal semitransparente */
 .modal.fade.show {
   display: block;
-  background-color: rgba(0, 0, 0, 0.5);
-  animation: fadeInBackdrop 0.3s ease;
+  background-color: rgba(0, 0, 0, 0.75);
+  animation: fadeInBackdrop 0.3s ease forwards;
 }
 
 @keyframes fadeInBackdrop {
-  from { background-color: rgba(0, 0, 0, 0); }
-  to { background-color: rgba(0, 0, 0, 0.5); }
+  from { background-color: rgba(0,0,0,0); }
+  to { background-color: rgba(0,0,0,0.75); }
 }
 
-.modal-dialog {
-  animation: slideInModal 0.4s ease;
+/* Contenedor modal */
+.modal-content {
+  background-color: #121212;
+  border: 3px solid #FFB22C;
+  border-radius: 1rem;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.8);
+  animation: slideInModal 0.4s ease forwards;
+  color: #eee;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+
 @keyframes slideInModal {
-  from { transform: translateY(-30px); opacity: 0; }
+  from { transform: translateY(-40px); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
 }
-.modal-close-animation {
-  animation: slideOutModal 0.3s ease forwards;
-}
-@keyframes slideOutModal {
-  from { transform: translateY(0); opacity: 1; }
-  to { transform: translateY(-40px); opacity: 0; }
-}
 
+/* Header */
 .modal-header {
-  background-color: #3498db;
-  color: white;
+  background: linear-gradient(90deg, #FFB22C, #cca830);
+  color: #121212;
+  font-weight: 700;
+  font-size: 1.3rem;
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-shadow: 0 0 3px rgba(0,0,0,0.25);
 }
 
-.badge {
-  font-size: 0.9rem;
-  padding: 0.35rem 0.6rem;
+.modal-header i {
+  margin-right: 0.5rem;
+}
+
+/* Botón cerrar */
+.btn-close {
+  filter: brightness(0) invert(1);
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
+}
+.btn-close:hover {
+  opacity: 1;
+}
+
+/* Body */
+.modal-body {
+  padding: 1.75rem 2rem;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* Etiquetas fuertes */
+.modal-body strong {
+  color: #FFB22C;
+}
+
+/* Tabla productos y pagos */
+.table {
+  background-color: #1a1a1a;
+  color: #eee;
   border-radius: 0.5rem;
+  overflow: hidden;
 }
 
-.modal.fade.show {
-  display: block;
-  background-color: rgba(0, 0, 0, 0.5);
-  animation: fadeInBackdrop 0.3s ease;
+.table thead {
+  background: #222;
+  color: #FFB22C;
+  font-weight: 700;
+  border-bottom: 2px solid #FFB22C;
 }
 
-@keyframes fadeInBackdrop {
-  from { background-color: rgba(0, 0, 0, 0); }
-  to { background-color: rgba(0, 0, 0, 0.5); }
+.table-bordered {
+  border: 2px solid #FFB22C;
 }
 
-.modal-dialog {
-  animation: slideInModal 0.4s ease;
-}
-@keyframes slideInModal {
-  from { transform: translateY(-30px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
-}
-.modal-close-animation {
-  animation: slideOutModal 0.3s ease forwards;
-}
-@keyframes slideOutModal {
-  from { transform: translateY(0); opacity: 1; }
-  to { transform: translateY(-40px); opacity: 0; }
+.table-bordered th,
+.table-bordered td {
+  border: 1px solid #FFB22C;
 }
 
-.modal-header {
-  background-color: #3498db;
-  color: white;
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #252525;
 }
 
+.table-sm td,
+.table-sm th {
+  padding: 0.4rem 0.75rem;
+}
+
+/* Badges para estados */
 .badge {
+  padding: 0.4em 0.75em;
+  font-weight: 700;
   font-size: 0.9rem;
-  padding: 0.35rem 0.6rem;
-  border-radius: 0.5rem;
+  border-radius: 0.75rem;
+  text-transform: uppercase;
 }
 
+.bg-success {
+  background-color: #28a745 !important;
+  color: #121212 !important;
+  text-shadow: 0 0 3px rgba(0,0,0,0.3);
+}
+
+.bg-danger {
+  background-color: #dc3545 !important;
+  color: #121212 !important;
+  text-shadow: 0 0 3px rgba(0,0,0,0.3);
+}
+
+/* Inputs nuevo pago */
+.modal-body input.form-control {
+  background-color: #2a2a2a;
+  border: 2px solid #444;
+  border-radius: 0.6rem;
+  color: #eee;
+  font-size: 1rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.modal-body input.form-control::placeholder {
+  color: #bbb;
+}
+
+.modal-body input.form-control:focus {
+  border-color: #FFB22C;
+  box-shadow: 0 0 8px rgba(255, 178, 44, 0.7);
+  background-color: #1a1a1a;
+  color: #fff;
+  outline: none;
+}
+
+/* Botones */
+.btn {
+  border-radius: 0.75rem;
+  font-weight: 600;
+  padding: 0.5rem 1.5rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 0 rgba(0,0,0,0);
+}
+
+.btn-secondary {
+  background-color: #333;
+  color: #FFB22C;
+  border: 2px solid #FFB22C;
+  box-shadow: 0 0 10px rgba(255, 178, 44, 0.2);
+}
+.btn-secondary:hover,
+.btn-secondary:focus {
+  background-color: #FFB22C;
+  color: #121212;
+  border-color: #cca830;
+  box-shadow: 0 0 15px rgba(255, 178, 44, 0.8);
+  transform: translateY(-2px);
+}
+
+.btn-success {
+  background: linear-gradient(90deg, #FFB22C, #cca830);
+  color: #121212;
+  border: none;
+  box-shadow: 0 0 12px rgba(255, 178, 44, 0.7);
+}
+.btn-success:hover,
+.btn-success:focus {
+  background: #ffcc5c;
+  color: #121212;
+  box-shadow: 0 0 20px rgba(255, 178, 44, 0.95);
+  transform: translateY(-2px);
+}
+
+/* Iconos en botones */
+.btn i {
+  margin-right: 0.5rem;
+}
+
+/* Footer */
+.modal-footer {
+  padding: 1.25rem 2rem;
+  background: #121212;
+  border-top: 2px solid #FFB22C;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Accesibilidad focus */
+.btn:focus {
+  outline: 3px solid #FFB22C;
+  outline-offset: 3px;
+}

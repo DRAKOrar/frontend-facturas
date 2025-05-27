@@ -1,14 +1,134 @@
+/* Contenedor del formulario */
+form.bg-white {
+  max-width: 700px;
+  margin: 0 auto;
+  border: 1px solid #dee2e6;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  background: #fff;
+}
+
+/* Títulos y etiquetas */
+h2 {
+  color: #000000;
+  font-weight: 700;
+  text-shadow: 1px 1px 3px rgba(255, 178, 44, 0.4);
+}
+
+label.form-label {
+  font-size: 1.05rem;
+  color: #212529;
+}
+
+/* Inputs: suavizar bordes, sombra al focus */
 input.form-control {
-  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+  border-radius: 8px;
+  border: 1.5px solid #ced4da;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 input.form-control:focus {
-  border-color: #0d6efd;
-  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+  border-color: #FFB22C;
+  box-shadow: 0 0 8px rgba(255, 178, 44, 0.5);
+  outline: none;
+}
+
+/* Íconos en labels: color y tamaño consistente */
+label.form-label i {
+  color: #000000;
+  font-size: 1.2rem;
+  vertical-align: middle;
+}
+
+/* Botón eliminar producto: estilo más destacado */
+button.btn-outline-danger {
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 button.btn-outline-danger:hover {
   background-color: #dc3545;
-  color: white;
-  transition: background-color 0.3s ease;
+  color: #fff;
+  box-shadow: 0 0 8px rgba(220, 53, 69, 0.6);
+}
+
+/* Botón agregar producto */
+button.btn-outline-secondary {
+  border-radius: 8px;
+  font-weight: 600;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+button.btn-outline-secondary:hover {
+  background-color: #FFB22C;
+  border-color: #FFB22C;
+  color: #000;
+}
+
+/* Total */
+div.mb-3.fs-5 {
+  padding-top: 0.5rem;
+  border-top: 1px solid #e9ecef;
+  color: #212529;
+}
+
+/* Texto total destacado */
+div.mb-3.fs-5 span.text-success {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #28a745;
+}
+
+/* Botón guardar */
+button.btn-primary {
+  background-color: #000000;
+  border-color: #000000;
+  font-weight: 700;
+  border-radius: 10px;
+  transition: background-color 0.4s ease, box-shadow 0.3s ease;
+}
+
+button.btn-primary:hover,
+button.btn-primary:focus {
+  background-color: #ffcc5c;
+  border-color: #ffcc5c;
+  box-shadow: 0 0 12px rgba(255, 178, 44, 0.7);
+  color: #000;
+}
+
+/* Animación pulse más sutil para botón guardar */
+button.btn-primary.animate__pulse {
+  animation-duration: 2.5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+}
+
+/* Espaciados más uniformes para filas de productos */
+.row.g-2.align-items-end.mb-3 {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #e9ecef;
+}
+
+/* Ajustes para inputs en productos */
+.row.g-2 input.form-control {
+  font-size: 0.95rem;
+}
+
+/* Responsive tweaks si quieres */
+@media (max-width: 576px) {
+  form.bg-white {
+    padding: 1.5rem 1rem;
+  }
+  button.btn-primary {
+    font-size: 1.15rem;
+  }
 }

@@ -12,7 +12,8 @@
   </div>
 
   <!-- Formulario -->
-  <form [formGroup]="facturaForm" (ngSubmit)="onSubmit()" class="bg-white p-4 shadow-lg rounded animate__animated animate__fadeInUp">
+  <form [formGroup]="facturaForm" (ngSubmit)="onSubmit()"
+    class="bg-white p-4 shadow-lg rounded animate__animated animate__fadeInUp">
 
     <!-- ID del Cliente -->
     <div class="mb-4">
@@ -22,7 +23,8 @@
 
     <!-- Productos -->
     <div formArrayName="productos">
-      <div *ngFor="let producto of productos.controls; let i = index" [formGroupName]="i" class="row g-2 align-items-end mb-3 animate__animated animate__fadeIn">
+      <div *ngFor="let producto of productos.controls; let i = index" [formGroupName]="i"
+        class="row g-2 align-items-end mb-3 animate__animated animate__fadeIn">
 
         <div class="col-md-4">
           <label class="form-label fw-bold"><i class="fas fa-box me-2"></i>Producto</label>
@@ -40,15 +42,18 @@
         </div>
 
         <div class="col-md-2 text-end">
-          <button type="button" class="btn btn-outline-danger btn-sm mt-2" (click)="eliminarProducto(i)" *ngIf="productos.length > 1" title="Eliminar producto">
+          <button type="button" class="btn btn-outline-danger btn-sm mt-2" (click)="eliminarProducto(i)"
+            *ngIf="productos.length > 1" title="Eliminar producto" aria-label="Eliminar producto">
             <i class="fas fa-trash-alt"></i>
           </button>
+
         </div>
       </div>
     </div>
 
     <!-- Botón agregar producto -->
-    <button type="button" class="btn btn-outline-secondary btn-sm mb-3 animate__animated animate__fadeIn" (click)="agregarProducto()">
+    <button type="button" class="btn btn-outline-secondary btn-sm mb-3 animate__animated animate__fadeIn"
+      (click)="agregarProducto()">
       <i class="fas fa-plus me-2"></i>Agregar Producto
     </button>
 

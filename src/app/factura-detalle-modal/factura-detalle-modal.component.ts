@@ -70,14 +70,4 @@ export class FacturaDetalleModalComponent {
     }
   });
 }
-
-
-  eliminarPago(id: number): void {
-    if (!confirm('¿Eliminar este abono?')) return;
-
-    this.pagoService.eliminarPago(id).subscribe({
-      next: () => this.pagos = this.pagos.filter(p => p.id !== id),
-      error: () => alert('No se pudo eliminar el pago.')
-    });
-  }
 }

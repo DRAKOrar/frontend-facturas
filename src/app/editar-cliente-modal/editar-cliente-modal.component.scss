@@ -1,49 +1,49 @@
-/* --- Fondo modal oscuro --- */
+/* --- Fondo modal oscuro semitransparente --- */
 .modal.fade.show {
   display: block;
-  background-color: rgba(0, 0, 0, 0.5);
-  animation: fadeInBackdrop 0.3s ease;
+  background-color: rgba(0, 0, 0, 0.75);
+  animation: fadeInBackdrop 0.3s ease forwards;
 }
 
-/* --- Animación de fondo --- */
+/* --- Animación del fondo --- */
 @keyframes fadeInBackdrop {
   from { background-color: rgba(0, 0, 0, 0); }
-  to { background-color: rgba(0, 0, 0, 0.5); }
+  to { background-color: rgba(0, 0, 0, 0.75); }
 }
 
 /* --- Contenido del modal --- */
 .modal-content {
-  border-radius: 0.75rem;
+  border-radius: 1rem;
   overflow: hidden;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
-  animation: slideInModal 0.4s ease;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.8);
+  animation: slideInModal 0.4s ease forwards;
+  background: #121212; /* fondo oscuro intenso */
+  border: 3px solid #FFB22C;
 }
 
 /* --- Animación de entrada --- */
 @keyframes slideInModal {
-  from { transform: translateY(-30px); opacity: 0; }
+  from { transform: translateY(-40px); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
 }
 
 /* --- Cabecera del modal --- */
 .modal-header {
-  background-color: #2c3e50;
-  color: white;
+  background: linear-gradient(90deg, #FFB22C, #cca830);
+  color: #121212;
   border-bottom: none;
-  padding: 1rem 1.25rem;
-  align-items: center;
-}
-
-.modal-title {
+  padding: 1.25rem 1.5rem;
+  font-weight: 700;
   font-size: 1.25rem;
-  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-shadow: 0 0 3px rgba(0,0,0,0.25);
 }
 
+/* Botón cerrar */
 .btn-close {
-  background: transparent;
-  border: none;
-  font-size: 1.2rem;
-  color: #fff;
+  filter: brightness(0) invert(1);
   opacity: 0.8;
   transition: opacity 0.2s ease;
 }
@@ -53,166 +53,95 @@
 
 /* --- Cuerpo del modal --- */
 .modal-body {
-  padding: 1.5rem;
+  padding: 1.75rem 2rem;
+  color: #eee;
+  font-size: 1rem;
+  background-color: #1a1a1a;
 }
 
+/* Etiquetas de formulario */
 .form-label {
-  font-weight: 500;
-  color: #34495e;
-  margin-bottom: 0.25rem;
+  font-weight: 600;
+  color: #FFB22C;
+  margin-bottom: 0.4rem;
+  text-shadow: 0 0 2px rgba(255, 178, 44, 0.6);
 }
 
+/* Inputs */
 input.form-control {
-  border-radius: 0.5rem;
-  transition: border-color 0.3s, box-shadow 0.3s;
+  background-color: #2a2a2a;
+  border: 2px solid #444;
+  border-radius: 0.6rem;
+  color: #eee;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
 }
+
+input.form-control::placeholder {
+  color: #bbb;
+}
+
 input.form-control:focus {
-  border-color: #3498db;
-  box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
-}
-
-/* --- Footer del modal --- */
-.modal-footer {
-  padding: 1rem 1.5rem;
-  border-top: none;
-  background-color: #f9f9f9;
-}
-
-.btn {
-  border-radius: 0.5rem;
-  font-weight: 500;
-  transition: all 0.3s ease;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.btn-success {
-  background-color: #27ae60;
-  border: none;
-}
-.btn-success:hover {
-  background-color: #1e8449;
-  transform: translateY(-1px);
-  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
-}
-
-.btn-secondary {
-  background-color: #7f8c8d;
-  border: none;
-}
-.btn-secondary:hover {
-  background-color: #626e70;
-  transform: translateY(-1px);
-  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
-}
-/* Fondo oscuro */
-.modal.fade.show {
-  display: block;
-  background-color: rgba(0, 0, 0, 0.5);
-  animation: fadeInBackdrop 0.3s ease;
-}
-
-/* Animación fondo */
-@keyframes fadeInBackdrop {
-  from { background-color: rgba(0, 0, 0, 0); }
-  to { background-color: rgba(0, 0, 0, 0.5); }
-}
-
-/* Animación entrada */
-.modal-content {
-  border-radius: 0.75rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  animation: slideInModal 0.4s ease;
-}
-
-/* Entrada modal */
-@keyframes slideInModal {
-  from { transform: translateY(-30px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
-}
-
-/* Animación salida */
-@keyframes slideOutModal {
-  from { transform: translateY(0); opacity: 1; }
-  to { transform: translateY(-40px); opacity: 0; }
-}
-
-.modal-close-animation {
-  animation: slideOutModal 0.3s ease forwards;
-}
-
-/* Header */
-.modal-header {
-  background-color: #2c3e50;
-  color: white;
-  border-bottom: none;
-  padding: 1rem 1.25rem;
-}
-
-.modal-title {
-  font-weight: bold;
-}
-
-.btn-close {
-  background: transparent;
-  border: none;
-  font-size: 1.2rem;
+  border-color: #FFB22C;
+  box-shadow: 0 0 8px rgba(255, 178, 44, 0.7);
+  background-color: #1a1a1a;
   color: #fff;
-  opacity: 0.8;
-}
-.btn-close:hover {
-  opacity: 1;
+  outline: none;
 }
 
-/* Formulario */
-.modal-body {
-  padding: 1.5rem;
-}
-.form-label {
-  font-weight: 500;
-  color: #34495e;
-}
-input.form-control {
-  border-radius: 0.5rem;
-  transition: border-color 0.3s, box-shadow 0.3s;
-}
-input.form-control:focus {
-  border-color: #3498db;
-  box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
-}
-
-/* Footer */
+/* --- Pie de modal --- */
 .modal-footer {
-  padding: 1rem 1.5rem;
-  background-color: #f9f9f9;
+  padding: 1.25rem 2rem;
+  background: #121212;
+  border-top: 2px solid #FFB22C;
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
 }
 
+/* Botones comunes */
 .btn {
-  border-radius: 0.5rem;
-  font-weight: 500;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  padding: 0.5rem 1.75rem;
   transition: all 0.3s ease;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
+  box-shadow: 0 0 0 rgba(0,0,0,0);
 }
 
-.btn-success {
-  background-color: #27ae60;
-  border: none;
-}
-.btn-success:hover {
-  background-color: #1e8449;
-  transform: translateY(-1px);
-  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
-}
-
+/* Botón cancelar */
 .btn-secondary {
-  background-color: #7f8c8d;
-  border: none;
+  background-color: #333;
+  color: #FFB22C;
+  border: 2px solid #FFB22C;
+  box-shadow: 0 0 10px rgba(255, 178, 44, 0.2);
 }
-.btn-secondary:hover {
-  background-color: #626e70;
-  transform: translateY(-1px);
-  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
+.btn-secondary:hover,
+.btn-secondary:focus {
+  background-color: #FFB22C;
+  color: #121212;
+  border-color: #cca830;
+  box-shadow: 0 0 15px rgba(255, 178, 44, 0.8);
+  transform: translateY(-2px);
+}
+
+/* Botón guardar */
+.btn-success {
+  background: linear-gradient(90deg, #FFB22C, #cca830);
+  color: #121212;
+  border: none;
+  box-shadow: 0 0 12px rgba(255, 178, 44, 0.7);
+}
+.btn-success:hover,
+.btn-success:focus {
+  background: #ffcc5c;
+  color: #121212;
+  box-shadow: 0 0 20px rgba(255, 178, 44, 0.95);
+  transform: translateY(-2px);
+}
+
+/* Para accesibilidad */
+.btn:focus {
+  outline: 3px solid #FFB22C;
+  outline-offset: 3px;
 }

@@ -1,74 +1,218 @@
-/* Fondo del modal */
+/* Fondo modal semitransparente */
 .modal.fade.show {
   display: block;
-  background-color: rgba(0, 0, 0, 0.5);
-  animation: fadeInBackdrop 0.3s ease;
+  background-color: rgba(0, 0, 0, 0.75);
+  animation: fadeInBackdrop 0.3s ease forwards;
 }
 
+/* Animación fondo */
 @keyframes fadeInBackdrop {
-  from { background-color: rgba(0, 0, 0, 0); }
-  to { background-color: rgba(0, 0, 0, 0.5); }
+  from { background-color: rgba(0,0,0,0); }
+  to { background-color: rgba(0,0,0,0.75); }
 }
 
-/* Entrada y salida del modal */
-.modal-dialog {
-  animation: slideInModal 0.4s ease;
+/* Contenido modal */
+.modal-content {
+  background-color: #121212;
+  border: 3px solid #FFB22C;
+  border-radius: 1rem;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.8);
+  animation: slideInModal 0.4s ease forwards;
 }
+
+/* Animación entrada */
 @keyframes slideInModal {
-  from { transform: translateY(-30px); opacity: 0; }
+  from { transform: translateY(-40px); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
-}
-.modal-close-animation {
-  animation: slideOutModal 0.3s ease forwards;
-}
-@keyframes slideOutModal {
-  from { transform: translateY(0); opacity: 1; }
-  to { transform: translateY(-40px); opacity: 0; }
 }
 
 /* Cabecera */
 .modal-header {
-  background-color: #2c3e50;
-  color: white;
-  padding: 1rem 1.5rem;
+  background: linear-gradient(90deg, #FFB22C, #cca830);
+  color: #121212;
   border-bottom: none;
-}
-.modal-title {
+  font-weight: 700;
   font-size: 1.25rem;
-  font-weight: bold;
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-shadow: 0 0 3px rgba(0,0,0,0.25);
 }
 
-/* Inputs */
-.form-control:focus {
-  border-color: #3498db;
-  box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
+/* Botón cerrar */
+.btn-close {
+  filter: brightness(0) invert(1);
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
+}
+.btn-close:hover {
+  opacity: 1;
+}
+
+/* Cuerpo modal */
+.modal-body {
+  padding: 1.75rem 2rem;
+  color: #eee;
+  font-size: 1rem;
+  background-color: #1a1a1a;
+}
+
+/* Etiquetas */
+.form-label {
+  font-weight: 600;
+  color: #FFB22C;
+  margin-bottom: 0.4rem;
+  text-shadow: 0 0 2px rgba(255, 178, 44, 0.6);
+}
+
+/* Select */
+.form-select {
+  background-color: #2a2a2a;
+  color: #eee;
+  border: 2px solid #444;
+  border-radius: 0.6rem;
+  padding: 0.4rem 1rem;
+  font-size: 1rem;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Botones */
-.btn {
-  border-radius: 0.5rem;
-  font-weight: 500;
-  transition: all 0.3s ease;
-}
-.btn-success {
-  background-color: #2ecc71;
-  border: none;
-}
-.btn-success:hover {
-  background-color: #27ae60;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-.btn-secondary {
-  background-color: #95a5a6;
-  border: none;
-}
-.btn-secondary:hover {
-  background-color: #7f8c8d;
+.form-select:focus {
+  border-color: #FFB22C;
+  box-shadow: 0 0 8px rgba(255, 178, 44, 0.7);
+  outline: none;
+  background-color: #1a1a1a;
+  color: #fff;
 }
 
-/* Productos */
-.border {
-  border: 1px solid #dee2e6;
+/* Inputs productos */
+input.form-control {
+  background-color: #2a2a2a;
+  border: 2px solid #444;
+  border-radius: 0.6rem;
+  color: #eee;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input.form-control::placeholder {
+  color: #bbb;
+}
+
+input.form-control:focus {
+  border-color: #FFB22C;
+  box-shadow: 0 0 8px rgba(255, 178, 44, 0.7);
+  background-color: #1a1a1a;
+  color: #fff;
+  outline: none;
+}
+
+/* Contenedor producto */
+.mb-3.border.rounded.p-3 {
+  border-color: #FFB22C;
+  background-color: #222;
+  box-shadow: inset 0 0 10px rgba(255, 178, 44, 0.1);
+}
+
+/* Botón eliminar producto */
+.btn-danger {
+  background-color: #b33a3a;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.25rem 0.7rem;
+  font-size: 1rem;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-danger:hover {
+  background-color: #ff4c4c;
+  box-shadow: 0 0 10px rgba(255, 80, 80, 0.8);
+}
+
+/* Botón agregar producto */
+.btn-secondary {
+  background-color: #333;
+  color: #FFB22C;
+  border: 2px solid #FFB22C;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  padding: 0.4rem 1.25rem;
+  margin-top: 0.5rem;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus {
+  background-color: #FFB22C;
+  color: #121212;
+  border-color: #cca830;
+  box-shadow: 0 0 15px rgba(255, 178, 44, 0.8);
+  transform: translateY(-2px);
+}
+
+/* Total */
+.mt-4 {
+  color: #eee;
+  font-weight: 700;
+  font-size: 1.2rem;
+  padding-top: 1rem;
+  border-top: 2px solid #FFB22C;
+}
+
+/* Footer */
+.modal-footer {
+  padding: 1.25rem 2rem;
+  background: #121212;
+  border-top: 2px solid #FFB22C;
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+/* Botones pie modal */
+.modal-footer .btn {
+  border-radius: 0.75rem;
+  font-weight: 600;
+  padding: 0.5rem 1.75rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 0 rgba(0,0,0,0);
+}
+
+.modal-footer .btn-secondary {
+  background-color: #333;
+  color: #FFB22C;
+  border: 2px solid #FFB22C;
+  box-shadow: 0 0 10px rgba(255, 178, 44, 0.2);
+}
+.modal-footer .btn-secondary:hover,
+.modal-footer .btn-secondary:focus {
+  background-color: #FFB22C;
+  color: #121212;
+  border-color: #cca830;
+  box-shadow: 0 0 15px rgba(255, 178, 44, 0.8);
+  transform: translateY(-2px);
+}
+
+.modal-footer .btn-success {
+  background: linear-gradient(90deg, #FFB22C, #cca830);
+  color: #121212;
+  border: none;
+  box-shadow: 0 0 12px rgba(255, 178, 44, 0.7);
+}
+.modal-footer .btn-success:hover,
+.modal-footer .btn-success:focus {
+  background: #ffcc5c;
+  color: #121212;
+  box-shadow: 0 0 20px rgba(255, 178, 44, 0.95);
+  transform: translateY(-2px);
+}
+
+/* Accesibilidad focus */
+.btn:focus {
+  outline: 3px solid #FFB22C;
+  outline-offset: 3px;
 }

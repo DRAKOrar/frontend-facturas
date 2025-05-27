@@ -1,471 +1,488 @@
- * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #F7F7F7 0%, #ffffff 100%);
-            min-height: 100vh;
-            color: #000000;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem 1rem;
-        }
-
-        /* Header mejorado */
-        .page-header {
-            text-align: center;
-            margin-bottom: 3rem;
-            position: relative;
-        }
-
-        .page-header h2 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #000000;
-            margin-bottom: 0.5rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        .page-header h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 4px;
-            background: linear-gradient(90deg, #FFB22C, #379777);
-            border-radius: 2px;
-        }
-
-        .page-header .subtitle {
-            color: #666666;
-            font-size: 1.1rem;
-            margin-top: 1rem;
-        }
-
-        /* Filtro de búsqueda mejorado */
-        .search-container {
-            margin-bottom: 2rem;
-            position: relative;
-            max-width: 500px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .search-input {
-            width: 100%;
-            padding: 1rem 1rem 1rem 3rem;
-            border: 2px solid #e9ecef;
-            border-radius: 50px;
-            font-size: 1rem;
-            background: white;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-        }
-
-        .search-input:focus {
-            outline: none;
-            border-color: #FFB22C;
-            box-shadow: 0 0 0 4px rgba(255, 178, 44, 0.1), 0 8px 25px rgba(0, 0, 0, 0.1);
-            transform: translateY(-2px);
-        }
-
-        .search-input::placeholder {
-            color: #999999;
-            font-style: italic;
-        }
-
-        .search-icon {
-            position: absolute;
-            left: 1rem;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #FFB22C;
-            font-size: 1.1rem;
-            z-index: 2;
-        }
-
-        /* Alertas mejoradas */
-        .alert {
-            border: none;
-            border-radius: 12px;
-            padding: 1rem 1.5rem;
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            font-weight: 500;
-            position: relative;
-            overflow: hidden;
-            animation: slideInDown 0.5s ease-out;
-        }
-
-        .alert-danger {
-            background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
-            color: white;
-            box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3);
-        }
-
-        .alert::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            height: 100%;
-            width: 4px;
-            background: white;
-        }
-
-        /* Spinner mejorado */
-        .loading-container {
-            text-align: center;
-            padding: 3rem;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            margin: 2rem 0;
-        }
-
-        .spinner-border {
-            width: 3rem;
-            height: 3rem;
-            border-width: 0.3rem;
-            border-color: #FFB22C;
-            border-right-color: transparent;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .loading-text {
-            margin-top: 1rem;
-            color: #666666;
-            font-size: 1.1rem;
-        }
-
-        /* Contenedor de tabla mejorado */
-        .table-container {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .table-container:hover {
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
-        }
-
-        /* Tabla mejorada */
-        .invoices-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 0;
-        }
-
-        .invoices-table thead {
-            background: linear-gradient(135deg, #FFB22C 0%, #e6a128 100%);
-        }
-
-        .invoices-table thead th {
-            padding: 1.2rem 1rem;
-            color: #000000;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            font-size: 0.9rem;
-            border: none;
-            position: relative;
-        }
-
-        .invoices-table thead th:not(:last-child)::after {
-            content: '';
-            position: absolute;
-            right: 0;
-            top: 25%;
-            height: 50%;
-            width: 1px;
-            background: rgba(0, 0, 0, 0.1);
-        }
-
-        .invoices-table tbody tr {
-            border-bottom: 1px solid #f0f0f0;
-            transition: all 0.2s ease;
-        }
-
-        .invoices-table tbody tr:nth-child(even) {
-            background-color: #F7F7F7;
-        }
-
-        .invoices-table tbody tr:hover {
-            background: linear-gradient(135deg, rgba(255, 178, 44, 0.05) 0%, rgba(55, 151, 119, 0.05) 100%);
-            transform: scale(1.01);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .invoices-table td {
-            padding: 1rem;
-            vertical-align: middle;
-            border: none;
-        }
-
-        /* IDs con estilo */
-        .invoice-id {
-            font-weight: 600;
-            color: #379777;
-            background: rgba(55, 151, 119, 0.1);
-            padding: 0.25rem 0.5rem;
-            border-radius: 6px;
-            font-size: 0.9rem;
-        }
-
-        /* Información del cliente */
-        .client-info {
-            display: flex;
-            flex-direction: column;
-            gap: 0.2rem;
-        }
-
-        .client-name {
-            font-weight: 600;
-            color: #000000;
-        }
-
-        .client-id {
-            font-size: 0.85rem;
-            color: #666666;
-            font-style: italic;
-        }
-
-        /* Fecha estilizada */
-        .invoice-date {
-            font-weight: 500;
-            color: #379777;
-        }
-
-        /* Total con formato especial */
-        .invoice-total {
-            font-weight: 700;
-            font-size: 1.1rem;
-            color: #000000;
-            background: linear-gradient(135deg, #FFB22C, #e6a128);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        /* Badges mejorados */
-        .status-badge {
-            padding: 0.4rem 0.8rem;
-            border-radius: 20px;
-            font-weight: 600;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.3rem;
-        }
-
-        .status-badge.active {
-            background: linear-gradient(135deg, #379777, #2d7a61);
-            color: white;
-            box-shadow: 0 2px 8px rgba(55, 151, 119, 0.3);
-        }
-
-        .status-badge.inactive {
-            background: linear-gradient(135deg, #dc3545, #c82333);
-            color: white;
-            box-shadow: 0 2px 8px rgba(220, 53, 69, 0.3);
-        }
-
-        .status-badge::before {
-            content: '';
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: currentColor;
-        }
-
-        /* Botones de acción mejorados */
-        .actions-container {
-            display: flex;
-            gap: 0.5rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .action-btn {
-            width: 40px;
-            height: 40px;
-            border: none;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-            font-size: 0.9rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .action-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transform: translateX(-100%);
-            transition: transform 0.3s;
-        }
-
-        .action-btn:hover::before {
-            transform: translateX(100%);
-        }
-
-        .action-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-        }
-
-        .btn-view {
-            background: linear-gradient(135deg, #379777, #2d7a61);
-            color: white;
-        }
-
-        .btn-edit {
-            background: linear-gradient(135deg, #FFB22C, #e6a128);
-            color: #000000;
-        }
-
-        .btn-delete {
-            background: linear-gradient(135deg, #dc3545, #c82333);
-            color: white;
-        }
-
-        .btn-pdf {
-            background: linear-gradient(135deg, #6c757d, #5a6268);
-            color: white;
-        }
-
-        /* Estado vacío mejorado */
-        .empty-state {
-            text-align: center;
-            padding: 4rem 2rem;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            margin: 2rem 0;
-        }
-
-        .empty-icon {
-            font-size: 4rem;
-            color: #FFB22C;
-            margin-bottom: 1.5rem;
-            opacity: 0.7;
-        }
-
-        .empty-title {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: #000000;
-            margin-bottom: 0.5rem;
-        }
-
-        .empty-message {
-            color: #666666;
-            font-size: 1.1rem;
-        }
-
-        /* Tooltips */
-        .action-btn[title]:hover::after {
-            content: attr(title);
-            position: absolute;
-            bottom: -35px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #000000;
-            color: white;
-            padding: 0.3rem 0.6rem;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            white-space: nowrap;
-            z-index: 1000;
-            pointer-events: none;
-        }
-
-        /* Responsive mejorado */
-        @media (max-width: 768px) {
-            .container {
-                padding: 1rem 0.5rem;
-            }
-
-            .page-header h2 {
-                font-size: 2rem;
-            }
-
-            .search-container {
-                margin-bottom: 1.5rem;
-            }
-
-            .table-container {
-                border-radius: 10px;
-                overflow-x: auto;
-            }
-
-            .invoices-table {
-                min-width: 700px;
-            }
-
-            .invoices-table th,
-            .invoices-table td {
-                padding: 0.8rem 0.6rem;
-            }
-
-            .actions-container {
-                gap: 0.3rem;
-            }
-
-            .action-btn {
-                width: 35px;
-                height: 35px;
-            }
-
-            .client-info {
-                min-width: 150px;
-            }
-        }
-
-        /* Animaciones */
-        @keyframes slideInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .fade-in {
-            animation: fadeIn 0.5s ease-in;
-        }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #f7f7f7 0%, #ffffff 100%);
+  min-height: 100vh;
+  color: #000000;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+/* Header mejorado */
+.page-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  position: relative;
+}
+
+.page-header h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #000000;
+  margin-bottom: 0.5rem;
+  position: relative;
+  display: inline-block;
+}
+
+.page-header h2::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 4px;
+  background: linear-gradient(90deg, #ffb22c, #379777);
+  border-radius: 2px;
+}
+
+.page-header .subtitle {
+  color: #666666;
+  font-size: 1.1rem;
+  margin-top: 1rem;
+}
+
+/* Filtro de búsqueda mejorado */
+.search-container {
+  margin-bottom: 2rem;
+  position: relative;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.search-input {
+  width: 100%;
+  padding: 1rem 1rem 1rem 3rem;
+  border: 2px solid #e9ecef;
+  border-radius: 50px;
+  font-size: 1rem;
+  background: white;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #ffb22c;
+  box-shadow: 0 0 0 4px rgba(255, 178, 44, 0.1), 0 8px 25px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.search-input::placeholder {
+  color: #999999;
+  font-style: italic;
+}
+
+.search-icon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #ffb22c;
+  font-size: 1.1rem;
+  z-index: 2;
+}
+
+/* Alertas mejoradas */
+.alert {
+  border: none;
+  border-radius: 12px;
+  padding: 1rem 1.5rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  position: relative;
+  overflow: hidden;
+  animation: slideInDown 0.5s ease-out;
+}
+
+.alert-danger {
+  background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3);
+}
+
+.alert::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 4px;
+  background: white;
+}
+
+/* Spinner mejorado */
+.loading-container {
+  text-align: center;
+  padding: 3rem;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  margin: 2rem 0;
+}
+
+.spinner-border {
+  width: 3rem;
+  height: 3rem;
+  border-width: 0.3rem;
+  border-color: #ffb22c;
+  border-right-color: transparent;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-text {
+  margin-top: 1rem;
+  color: #666666;
+  font-size: 1.1rem;
+}
+
+/* Contenedor de tabla mejorado */
+.table-container {
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.table-container:hover {
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+}
+
+/* Tabla mejorada */
+.invoices-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0;
+}
+
+.invoices-table thead {
+  background: linear-gradient(135deg, #ffb22c 0%, #e6a128 100%);
+}
+
+.invoices-table thead th {
+  padding: 1.2rem 1rem;
+  color: #000000;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 0.9rem;
+  border: none;
+  position: relative;
+}
+
+.invoices-table thead th:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 25%;
+  height: 50%;
+  width: 1px;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.invoices-table tbody tr {
+  border-bottom: 1px solid #f0f0f0;
+  transition: all 0.2s ease;
+}
+
+.invoices-table tbody tr:nth-child(even) {
+  background-color: #f7f7f7;
+}
+
+.invoices-table tbody tr:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 178, 44, 0.05) 0%,
+    rgba(55, 151, 119, 0.05) 100%
+  );
+  transform: scale(1.01);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.invoices-table td {
+  padding: 1rem;
+  vertical-align: middle;
+  border: none;
+}
+
+/* IDs con estilo */
+.invoice-id {
+  font-weight: 600;
+  color: #379777;
+  background: rgba(55, 151, 119, 0.1);
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+
+/* Información del cliente */
+.client-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.client-name {
+  font-weight: 600;
+  color: #000000;
+}
+
+.client-id {
+  font-size: 0.85rem;
+  color: #666666;
+  font-style: italic;
+}
+
+/* Fecha estilizada */
+.invoice-date {
+  font-weight: 500;
+  color: #379777;
+}
+
+/* Total con formato especial */
+.invoice-total {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #000000;
+  background: linear-gradient(135deg, #ffb22c, #e6a128);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Badges mejorados */
+.status-badge {
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.status-badge.active {
+  background: linear-gradient(135deg, #379777, #2d7a61);
+  color: white;
+  box-shadow: 0 2px 8px rgba(55, 151, 119, 0.3);
+}
+
+.status-badge.inactive {
+  background: linear-gradient(135deg, #dc3545, #c82333);
+  color: white;
+  box-shadow: 0 2px 8px rgba(220, 53, 69, 0.3);
+}
+
+.status-badge::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+/* Botones de acción mejorados */
+.actions-container {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.action-btn {
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 0.9rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.action-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    45deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transform: translateX(-100%);
+  transition: transform 0.3s;
+}
+
+.action-btn:hover::before {
+  transform: translateX(100%);
+}
+
+.action-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.btn-view {
+  background: linear-gradient(135deg, #379777, #2d7a61);
+  color: white;
+}
+
+.btn-edit {
+  background: linear-gradient(135deg, #ffb22c, #e6a128);
+  color: #000000;
+}
+
+.btn-delete {
+  background: linear-gradient(135deg, #dc3545, #c82333);
+  color: white;
+}
+
+.btn-pdf {
+  background: linear-gradient(135deg, #6c757d, #5a6268);
+  color: white;
+}
+
+/* Estado vacío mejorado */
+.empty-state {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  margin: 2rem 0;
+}
+
+.empty-icon {
+  font-size: 4rem;
+  color: #ffb22c;
+  margin-bottom: 1.5rem;
+  opacity: 0.7;
+}
+
+.empty-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #000000;
+  margin-bottom: 0.5rem;
+}
+
+.empty-message {
+  color: #666666;
+  font-size: 1.1rem;
+}
+
+/* Tooltips */
+.action-btn[title]:hover::after {
+  content: attr(title);
+  position: absolute;
+  bottom: -35px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #000000;
+  color: white;
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  white-space: nowrap;
+  z-index: 1000;
+  pointer-events: none;
+}
+
+/* Responsive mejorado */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem 0.5rem;
+  }
+
+  .page-header h2 {
+    font-size: 2rem;
+  }
+
+  .search-container {
+    margin-bottom: 1.5rem;
+  }
+
+  .table-container {
+    border-radius: 10px;
+    overflow-x: auto;
+  }
+
+  .invoices-table {
+    min-width: 700px;
+  }
+
+  .invoices-table th,
+  .invoices-table td {
+    padding: 0.8rem 0.6rem;
+  }
+
+  .actions-container {
+    gap: 0.3rem;
+  }
+
+  .action-btn {
+    width: 35px;
+    height: 35px;
+  }
+
+  .client-info {
+    min-width: 150px;
+  }
+}
+
+/* Animaciones */
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-in;
+}
